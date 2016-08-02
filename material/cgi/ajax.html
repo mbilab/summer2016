@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ajax demo</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<!--adopt Google Hosted Libraries to utilize browser cache-->
+		<script>
+			jQuery(document).ready(function(){
+				// handler after that the document is ready ('ready' event)
+				jQuery('button[type=submit]').click(function(){
+					// handler after clicking the button ('click' event)
+					jQuery.ajax({
+						/* call ajax(), there are many ajax functions in jQuery such as
+						get(), getJSON(), getScrtip()... see http://api.jquery.com/category/ajax/ */
+						data:{id:jQuery('input[name=id]').val()},
+						/* data to server. here we still get the data from <input>, just as
+						non-ajax version*/
+						url:'ajax.cgi', // CGI URL
+						success:function(data){ // (A)
+							/* handler after server respond. the response is no longer processed by
+							the browser. instead, it becomes a variable (data) and processed by
+							JavaScript*/
+							jQuery('#content').html(data);
+							/* let #content display the respondse. here we use html() to genereate
+							new HTML*/
+						}
+					});
+					/* (B) asynchronous is here! if you know when the code is executed and know
+					the relation to (A), you understand Ajax*/
+					jQuery('#content').html('loading...');
+					/* let #content display the loading message. it could be more beautiful,
+					see http://www.ajaxload.info/ and http://www.preloaders.net/ */
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<input name="id" type="text" />
+		<!--the form design should follow the convention of the non-ajax version, in
+		case that you need a non-ajax version-->
+		<button type="submit">Submit</button>
+		<div id="content">
+			<!--set the id attribute for jQuery selection-->
+			initial content
+		</div>
+	</body>
+</html>
+<!--
+vi:nowrap:sw=1:ts=1
+-->

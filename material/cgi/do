@@ -1,0 +1,12 @@
+#!/usr/bin/perl -w
+
+# input
+use CGI; # just like include in C
+my $cgi = new CGI; # create a CGI object
+my $nick = $cgi->param('nick');
+my $color = $cgi->param('color');
+
+# output
+print "Content-type: text/html\n\n"; # HTTP header
+print "Hello World!<br />"; # any valid HTML
+print "$nick likes $color!\n"; # any valid HTML
